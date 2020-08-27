@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveForce = 1.0f;
+    public float moveForce = 0.5f;
     public int scoreCount = 0;
 
     private Rigidbody rb;
@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     public GameObject BadPanel;
 
     private Vector3 startPos;
+    public Material collectMaterial;
+
+    public KeyCode RestartKey;
 
     // Start is called before the first frame update
     void Start()
@@ -38,14 +41,20 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Vector3 inputForce = new Vector3();
-        inputForce.x = Input.GetAxis("Horizontal");
+        //inputForce.x = Input.GetAxis("Horizontal");
         inputForce.z = Input.GetAxis("Vertical");
 
         Vector3 forward = Vector3.Cross(Vector3.up, Camera.main.transform.right) * inputForce.z; ;
         cb.Move(forward * -moveForce);
 
-        Vector3 side = Vector3.Cross(Vector3.up, Camera.main.transform.forward) * inputForce.x; ;
-        cb.Move(side * moveForce);
+        //Vector3 side = Vector3.Cross(Vector3.up, Camera.main.transform.forward) * inputForce.x; ;
+        //cb.Move(side * moveForce);
+
+        if (Input.GetKey(RestartKey))
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene("SampleScene");
+        }
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -55,11 +64,6 @@ public class PlayerController : MonoBehaviour
             BadPanel.gameObject.SetActive(true);
 
             Time.timeScale = 0;
-
-            if (Input.GetKey(KeyCode.R))
-            {
-                SceneManager.LoadScene("SampleScene");
-            }
         }
     }
 
@@ -67,21 +71,18 @@ public class PlayerController : MonoBehaviour
     {
         if (gemCol.gameObject.tag == "Gem")
         {
-            Destroy(gemCol.gameObject);
+            gemCol.GetComponent<Renderer>().material = collectMaterial;
+
+            Destroy(gemCol.gameObject, 0.25f);
+
             scoreCount++;
             
-            if (scoreCount == 49)
+            if (scoreCount/2 == 49)
             {
                 GoodPanel.gameObject.SetActive(true);
 
                 Time.timeScale = 0;
-
-                if (Input.GetKey(KeyCode.R))
-                {
-                    SceneManager.LoadScene("SampleScene");
-                }
             }
         }
     }
-
 }

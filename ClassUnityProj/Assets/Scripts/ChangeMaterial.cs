@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ChangeMaterial : MonoBehaviour
 {
-    public List<Material> materials = new List<Material> ();
     MeshRenderer meshRenderer;
     Material[] newMaterial;
     Material[] originMaterial;
@@ -29,9 +28,7 @@ public class ChangeMaterial : MonoBehaviour
 
         else
         {
-
             meshRenderer.materials = originMaterial;
         }
-
     }
 }

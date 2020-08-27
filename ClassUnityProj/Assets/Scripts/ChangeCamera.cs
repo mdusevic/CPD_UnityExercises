@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChangeCamera : MonoBehaviour
 {
     public Transform Player;
-    public Camera ThirdPersonCam;
+    public Camera FollowCam, TopDownCam;
     public KeyCode TKey;
     public bool camSwitch = false;
 
@@ -14,7 +14,8 @@ public class ChangeCamera : MonoBehaviour
         if (Input.GetKeyDown(TKey))
         {
             camSwitch = !camSwitch;
-            ThirdPersonCam.gameObject.SetActive(!camSwitch);
+            TopDownCam.gameObject.SetActive(camSwitch);
+            FollowCam.gameObject.SetActive(!camSwitch);
         }
     }
 }

@@ -3117,15 +3117,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 887775075}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8922878baccbb3449a65f4b744f24afa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materials:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!143 &887775083
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3151,15 +3147,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 887775075}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 324fadc93ef27ed40af8feedd34dacc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 887775081}
-  ThirdPersonCam: {fileID: 963194227}
+  FollowCam: {fileID: 1547518032}
+  TopDownCam: {fileID: 963194227}
   TKey: 9
-  camSwitch: 1
+  camSwitch: 0
 --- !u!1001 &904109927
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7233,7 +7230,22 @@ PrefabInstance:
     - target: {fileID: 859175121283308980, guid: 9ba403b1aa2204f46841df7639003325,
         type: 3}
       propertyPath: moveForce
-      value: 0.25
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 859175121283308980, guid: 9ba403b1aa2204f46841df7639003325,
+        type: 3}
+      propertyPath: collectMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c54f999b6327e745b7368a4b74d2e57, type: 2}
+    - target: {fileID: 859175121283308980, guid: 9ba403b1aa2204f46841df7639003325,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 887775075}
+    - target: {fileID: 859175121283308980, guid: 9ba403b1aa2204f46841df7639003325,
+        type: 3}
+      propertyPath: RestartKey
+      value: 114
       objectReference: {fileID: 0}
     - target: {fileID: 859175121283308981, guid: 9ba403b1aa2204f46841df7639003325,
         type: 3}
@@ -7294,6 +7306,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_UseGravity
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 859175121283308985, guid: 9ba403b1aa2204f46841df7639003325,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 859175121283308987, guid: 9ba403b1aa2204f46841df7639003325,
         type: 3}
