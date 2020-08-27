@@ -7,9 +7,10 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public float moveForce = 1.0f;
-    public float jumpForce = 4.0f;
+    public int scoreCount = 0;
 
     private Rigidbody rb;
+    private CharacterController cb;
 
     public GameObject GoodPanel;
     public GameObject BadPanel;
@@ -20,6 +21,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        cb = GetComponent<CharacterController>();
+
         startPos = transform.position;
 
         if (rb == null)
@@ -39,24 +42,14 @@ public class PlayerController : MonoBehaviour
         inputForce.z = Input.GetAxis("Vertical");
 
         Vector3 forward = Vector3.Cross(Vector3.up, Camera.main.transform.right) * inputForce.z; ;
-        rb.AddForce(forward * -moveForce);
+        cb.Move(forward * -moveForce);
 
         Vector3 side = Vector3.Cross(Vector3.up, Camera.main.transform.forward) * inputForce.x; ;
-        rb.AddForce(side * moveForce);
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        }
+        cb.Move(side * moveForce);
     }
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Respawn")
-        {
-            transform.position = startPos;
-        }
-
         if (collision.gameObject.tag == "Enemy")
         {
             BadPanel.gameObject.SetActive(true);
@@ -68,18 +61,27 @@ public class PlayerController : MonoBehaviour
                 SceneManager.LoadScene("SampleScene");
             }
         }
+    }
 
-        if (collision.gameObject.tag == "Gem")
+    public void OnTriggerEnter(Collider gemCol)
+    {
+        if (gemCol.gameObject.tag == "Gem")
         {
-            Destroy(collision.gameObject);
-            GoodPanel.gameObject.SetActive(true);
-
-            Time.timeScale = 0;
-
-            if (Input.GetKey(KeyCode.R))
+            Destroy(gemCol.gameObject);
+            scoreCount++;
+            
+            if (scoreCount == 49)
             {
-                SceneManager.LoadScene("SampleScene");
+                GoodPanel.gameObject.SetActive(true);
+
+                Time.timeScale = 0;
+
+                if (Input.GetKey(KeyCode.R))
+                {
+                    SceneManager.LoadScene("SampleScene");
+                }
             }
         }
     }
+
 }

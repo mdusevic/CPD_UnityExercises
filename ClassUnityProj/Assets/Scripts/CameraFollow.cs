@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
-
 public class CameraFollow : MonoBehaviour
 {
-    public GameObject target;
-    public Vector3 offset;
+    public float turnSpeed = 0.2f;
+    public Transform player;
 
-    // Start is called before the first frame update
+    private Vector3 offset;
+
     void Start()
     {
-        
+        offset = new Vector3(player.position.x, player.position.y + 4.0f, player.position.z + 3.0f);
     }
 
-    // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        transform.position = target.transform.position + offset;
+        offset = Quaternion.AngleAxis(Input.GetAxis("Horizontal") * turnSpeed, Vector3.up) * offset;
+        transform.position = player.position + offset;
+        transform.LookAt(player.position);
     }
 }
