@@ -9,25 +9,20 @@ public class MovingPlatform : MonoBehaviour
     public GameObject targetPos1;
     public GameObject targetPos2;
 
+    private Rigidbody rb;
     public GameObject player;
 
     private bool firstMove;
 
-    private bool isMounted;
-    private Vector3 offset;
-
-    private Transform tr = null;
-
     void Start()
     {
-        firstMove = true;
+        rb = GetComponent<Rigidbody>();
 
-        isMounted = false;
+        firstMove = true;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        offset = transform.position - player.transform.position;
         Move();
     }
 
@@ -36,21 +31,11 @@ public class MovingPlatform : MonoBehaviour
         if (firstMove)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPos1.transform.position, speed * Time.deltaTime);
-
-            if (isMounted)
-            {
-                player.transform.position = transform.position + offset;
-            }
         }
 
         if (!firstMove)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPos2.transform.position, speed * Time.deltaTime);
-
-            if (isMounted)
-            {
-                player.transform.position = transform.position + offset;
-            }
         }
     }
 
@@ -67,20 +52,6 @@ public class MovingPlatform : MonoBehaviour
             {
                 firstMove = true;
             }
-        }
-
-        if (collision.gameObject.tag == "Player")
-        {
-            tr = collision.gameObject.transform.parent;
-            collision.gameObject.transform.SetParent(transform);
-        }
-    }
-
-    void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.transform.SetParent(tr);
         }
     }
 }
