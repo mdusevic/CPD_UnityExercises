@@ -6,7 +6,9 @@ public class MovingPlatform : MonoBehaviour
 {
     public float speed;
 
+    [SerializeField]
     public GameObject targetPos1;
+    [SerializeField]
     public GameObject targetPos2;
 
     private Rigidbody rb;
@@ -41,7 +43,7 @@ public class MovingPlatform : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Platform")
+        if (collision.gameObject.tag == "Platform" || collision.gameObject.tag == "MovingPlatform")
         {
             if (firstMove)
             {
