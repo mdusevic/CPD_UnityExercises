@@ -11,7 +11,8 @@ public class PressurePlate : MonoBehaviour
     Material[] newMaterial;
     Material[] originMaterial;
 
-    public Vector3 target;
+    public Transform plate;
+
     public float speed;
 
     private bool movePlate = true;
@@ -39,7 +40,7 @@ public class PressurePlate : MonoBehaviour
         {
             if (movePlate)
             {
-                transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+                plate.position -= new Vector3(0f, 0.1f, 0f);
                 movePlate = false;
             }
 

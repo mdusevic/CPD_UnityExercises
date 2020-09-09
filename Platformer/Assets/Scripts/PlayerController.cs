@@ -37,4 +37,30 @@ public class PlayerController : MonoBehaviour
         moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
         cb.Move(moveDirection * Time.deltaTime);
     }
+
+    public void TouchLeft()
+    {
+        moveDirection = new Vector3(0f, moveDirection.y, Input.GetAxis("Horizontal") * moveForce);
+        moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
+        cb.Move(-moveDirection * Time.deltaTime);
+    }
+
+    public void TouchRight()
+    {
+        moveDirection = new Vector3(0f, moveDirection.y, Input.GetAxis("Horizontal") * moveForce);
+        moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
+        cb.Move(moveDirection * Time.deltaTime);
+    }
+
+    public void TouchJump()
+    {
+        moveDirection = new Vector3(0f, moveDirection.y, Input.GetAxis("Horizontal") * moveForce);
+        if (cb.isGrounded)
+        {
+            if (Input.GetButtonDown("Jump"))
+            {
+                moveDirection.y = jumpForce;
+            }
+        }
+    }
 }

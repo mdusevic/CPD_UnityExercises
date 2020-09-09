@@ -19,7 +19,7 @@ public class EndLevel : MonoBehaviour
         if (Input.GetKey(KeyCode.R))
         {
             Time.timeScale = 1;
-            SceneManager.LoadScene("Game", LoadSceneMode.Single);
+            SceneManager.LoadScene("Level1", LoadSceneMode.Single);
         }
     }
 
