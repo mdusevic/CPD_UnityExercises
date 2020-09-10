@@ -11,6 +11,12 @@ public class SceneSwitcher : MonoBehaviour
         SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
     }
 
+    public void GotoLevelSelect()
+    {
+        Time.timeScale = 0f;
+        SceneManager.LoadScene("Level Select Menu", LoadSceneMode.Single);
+    }
+
     public void GotoLevel1Scene()
     {
         Time.timeScale = 1f;
@@ -21,6 +27,12 @@ public class SceneSwitcher : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("Level2", LoadSceneMode.Single);
+    }
+
+    public void GotoLevel3Scene()
+    {
+        //Time.timeScale = 1f;
+        //SceneManager.LoadScene("Level3", LoadSceneMode.Single);
     }
 
     public void GotoExit()

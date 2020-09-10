@@ -43,7 +43,7 @@ public class MovingPlatform : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Platform" || collision.gameObject.tag == "MovingPlatform")
+        if (collision.gameObject.tag == "Platform" || collision.gameObject.tag == "MovingPlatform" || collision.gameObject.tag == "InvisiblePlatform")
         {
             if (firstMove)
             {

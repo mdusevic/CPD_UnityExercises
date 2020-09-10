@@ -38,29 +38,11 @@ public class PlayerController : MonoBehaviour
         cb.Move(moveDirection * Time.deltaTime);
     }
 
-    public void TouchLeft()
+    private void OnCollisionEnter(Collision collision)
     {
-        moveDirection = new Vector3(0f, moveDirection.y, Input.GetAxis("Horizontal") * moveForce);
-        moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
-        cb.Move(-moveDirection * Time.deltaTime);
-    }
-
-    public void TouchRight()
-    {
-        moveDirection = new Vector3(0f, moveDirection.y, Input.GetAxis("Horizontal") * moveForce);
-        moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
-        cb.Move(moveDirection * Time.deltaTime);
-    }
-
-    public void TouchJump()
-    {
-        moveDirection = new Vector3(0f, moveDirection.y, Input.GetAxis("Horizontal") * moveForce);
-        if (cb.isGrounded)
+        if (collision.gameObject.tag == "InvisiblePlatform")
         {
-            if (Input.GetButtonDown("Jump"))
-            {
-                moveDirection.y = jumpForce;
-            }
+            collision.collider.gameObject.SetActive(false);
         }
     }
 }
