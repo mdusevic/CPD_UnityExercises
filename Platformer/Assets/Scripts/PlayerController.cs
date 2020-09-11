@@ -9,9 +9,9 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public float gravityScale;
     public CharacterController cb;
-
     private Vector3 moveDirection;
 
+    private Touch touch;
     private Rigidbody rb;
 
     // Start is called before the first frame update
@@ -26,19 +26,39 @@ public class PlayerController : MonoBehaviour
     {
         moveDirection = new Vector3(0f, moveDirection.y, Input.GetAxis("Horizontal") * moveForce);
 
-        if (cb.isGrounded)
+        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
         {
-            if (Input.GetButtonDown("Jump"))
-            {
-                moveDirection.y = jumpForce;
-            }
+            MobileMovement();
+        }
+
+        Movement();
+    }
+
+    void Movement()
+    {
+        if (Input.GetButtonDown("Jump") && cb.isGrounded)
+        {
+            moveDirection.y = jumpForce;
         }
 
         moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
         cb.Move(moveDirection * Time.deltaTime);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void MobileMovement()
+    {
+        Vector3 acc = Input.acceleration;
+
+        if (Input.touchCount > 0 && cb.isGrounded)
+        {
+            touch = Input.GetTouch(0);
+            moveDirection.y = jumpForce;
+        }
+
+        cb.Move(new Vector3(0, 0, acc.x * moveForce) * Time.deltaTime);
+    }
+
+    void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "InvisiblePlatform")
         {

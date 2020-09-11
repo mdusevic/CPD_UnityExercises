@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AttachToPlatform : MonoBehaviour
 {
-
     Transform originalParent;
 
     // Start is called before the first frame update

@@ -31,8 +31,8 @@ public class SceneSwitcher : MonoBehaviour
 
     public void GotoLevel3Scene()
     {
-        //Time.timeScale = 1f;
-        //SceneManager.LoadScene("Level3", LoadSceneMode.Single);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Level3", LoadSceneMode.Single);
     }
 
     public void GotoExit()

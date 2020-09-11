@@ -16,11 +16,7 @@ public class EndLevel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.R))
-        {
-            Time.timeScale = 1;
-            SceneManager.LoadScene("Level1", LoadSceneMode.Single);
-        }
+
     }
 
     void OnTriggerEnter(Collider collider)
@@ -28,7 +24,7 @@ public class EndLevel : MonoBehaviour
         if (collider.gameObject.tag == "Player")
         {
             endLevelUI.SetActive(true);
-            Time.timeScale = 0;
+            Time.timeScale = 0f;
         }
     }
 }
