@@ -12,7 +12,6 @@ public class MovingPlatform : MonoBehaviour
     public GameObject targetPos2;
 
     private Rigidbody rb;
-    public GameObject player;
 
     private bool firstMove;
 
