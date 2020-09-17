@@ -1,10 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void OnStartUp()
+    {
+        Time.timeScale = 0f;
+        SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
+    }
+
     public void GotoMainMenu()
     {
         Time.timeScale = 0f;
