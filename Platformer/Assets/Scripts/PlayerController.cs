@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 acc = Input.acceleration;
 
+        moveForce *= 2;
+
         if (Input.touchCount > 0 && cb.isGrounded)
         {
             touch = Input.GetTouch(0);
