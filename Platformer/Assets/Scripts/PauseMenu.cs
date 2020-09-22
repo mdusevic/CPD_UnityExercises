@@ -13,55 +13,52 @@ public class PauseMenu : MonoBehaviour
     void Start()
     {
         pauseMenuUI.SetActive(false);
-        pauseIcon.SetActive(true);
+        pauseIcon.SetActive(false);
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
+        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            pauseIcon.SetActive(true);
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GameIsPaused = !GameIsPaused;
-        }
+            Debug.Log("jdfoweiajfdo");
 
-        if (pauseMenuUI.activeSelf)
-        {
-            GameIsPaused = true;
-        }
-
-        else if (!pauseMenuUI.activeSelf)
-        {
-            GameIsPaused = false;
-        }
-
-        if (GameIsPaused)
-        {
-            Pause();
-        }
-
-        else if (!GameIsPaused)
-        {
-            Resume();
+            if (GameIsPaused)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }
         }
     }
 
     public void Resume()
     {
-        Time.timeScale = 1f;
         pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
     }
 
     public void Pause()
     {
-        Time.timeScale = 0f;
         pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
     }
 
     public void MainMenu()
     {
-        Time.timeScale = 1f;
         pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
+        GameIsPaused = false;
     }
 
     public void Quit()
